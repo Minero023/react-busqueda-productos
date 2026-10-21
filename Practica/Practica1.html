@@ -1,0 +1,336 @@
+<!DOCTYPE html> <!-- Indica al navegador que el documento usa el estándar HTML5 -->
+<html lang="es"> <!-- Etiqueta raíz del documento; define el idioma en español -->
+
+<head> <!-- Contiene metadatos y configuraciones que NO se ven directamente en la página -->
+    <meta charset="UTF-8"> <!-- Permite usar tildes, eñes y caracteres especiales sin errores -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Hace que el diseño sea adaptable (responsive) en celulares -->
+    <title>Plantilla de Repaso: HTML y CSS</title> <!-- Título que aparece en la pestaña del navegador -->
+
+    <!-- Etiqueta <style>: Permite escribir código CSS dentro del mismo archivo HTML.
+         (Nota para tu prueba: Si usas un archivo externo, se enlaza con: <link rel="stylesheet" href="estilos.css">) -->
+    <style>
+        /* ==========================================
+           1. SELECTOR UNIVERSAL Y RESETEO BÁSICO
+           ========================================== */
+        * {
+            margin: 0; /* Elimina los márgenes externos por defecto del navegador */
+            padding: 0; /* Elimina el relleno interno por defecto */
+            box-sizing: border-box; /* Hace que el ancho (width) incluya el padding y el borde, evitando que las cajas se deformen */
+        }
+
+        /* ==========================================
+           2. SELECTORES DE ETIQUETA (Afectan a todo el documento)
+           ========================================== */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Define la tipografía general */
+            background-color: #f4f6f9; /* Color de fondo de la página (código hexadecimal) */
+            color: #333333; /* Color del texto general */
+            line-height: 1.6; /* Espacio vertical entre líneas de texto para mejorar la lectura */
+        }
+
+        /* ==========================================
+           3. CABECERA Y NAVEGACIÓN (Uso de Flexbox)
+           ========================================== */
+        header {
+            background-color: #1e293b; /* Fondo oscuro */
+            color: #ffffff; /* Texto blanco */
+            padding: 20px; /* Espacio interno en los 4 lados */
+            text-align: center; /* Centra el texto horizontalmente */
+        }
+
+        nav ul {
+            list-style: none; /* Quita los puntos (viñetas) de la lista */
+            display: flex; /* Activa Flexbox: pone los elementos hijos (li) en una sola fila horizontal */
+            justify-content: center; /* Centra los elementos horizontalmente en el contenedor */
+            gap: 25px; /* Espacio exacto de separación entre cada elemento de la lista */
+            margin-top: 15px; /* Margen superior para separar del título */
+        }
+
+        nav a {
+            color: #38bdf8; /* Color de los enlaces */
+            text-decoration: none; /* Quita el subrayado clásico de los enlaces */
+            font-weight: bold; /* Pone el texto en negrita */
+            transition: color 0.3s; /* Suaviza el cambio de color durante 0.3 segundos */
+        }
+
+        /* Pseudo-clase :hover -> Se activa cuando el usuario pasa el cursor por encima */
+        nav a:hover {
+            color: #ffffff; /* Cambia a blanco al pasar el ratón */
+            text-decoration: underline; /* Agrega subrayado al pasar el ratón */
+        }
+
+        /* ==========================================
+           4. CONTENEDOR PRINCIPAL Y CLASES (.clase)
+           ========================================== */
+        /* Se usa punto (.) para seleccionar elementos con class="contenedor" */
+        .contenedor {
+            max-width: 960px; /* Ancho máximo para que no se estire demasiado en pantallas gigantes */
+            margin: 30px auto; /* 30px arriba/abajo, y 'auto' a los lados para centrar el bloque en la pantalla */
+            padding: 0 20px; /* 0 arriba/abajo, 20px a los lados para que no toque los bordes en pantallas pequeñas */
+        }
+
+        /* Diseño de tarjetas para las secciones (Modelo de Caja / Box Model) */
+        .tarjeta {
+            background-color: #ffffff; /* Fondo blanco */
+            border: 1px solid #e2e8f0; /* Borde: grosor (1px), estilo (sólido), color (#e2e8f0) */
+            border-radius: 8px; /* Redondea las esquinas de la caja */
+            padding: 25px; /* Espacio interno entre el borde y el contenido */
+            margin-bottom: 25px; /* Espacio externo inferior para separar una tarjeta de otra */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Sombra suave: eje X, eje Y, desenfoque, color con transparencia */
+        }
+
+        h2 {
+            color: #0f172a;
+            border-bottom: 2px solid #38bdf8; /* Línea decorativa debajo de los subtítulos */
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+        }
+
+        .destacado {
+            background-color: #fef08a; /* Fondo amarillo suave */
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        /* ==========================================
+           5. LAYOUT DE COLUMNAS CON FLEXBOX
+           ========================================== */
+        .fila-flex {
+            display: flex; /* Pone las cajas hijas una al lado de la otra */
+            gap: 20px; /* Espacio entre columnas */
+            flex-wrap: wrap; /* Permite que las columnas bajen a otra línea si no caben en la pantalla */
+            margin-top: 15px;
+        }
+
+        .columna {
+            flex: 1; /* Hace que todas las columnas crezcan por igual ocupando el mismo ancho */
+            min-width: 250px; /* Ancho mínimo antes de obligar a la columna a bajar de línea */
+            background-color: #f8fafc;
+            padding: 15px;
+            border-left: 4px solid #38bdf8; /* Borde decorativo solo a la izquierda */
+        }
+
+        /* ==========================================
+           6. ESTILOS DE TABLA
+           ========================================== */
+        table {
+            width: 100%; /* Ocupa todo el ancho disponible de su contenedor */
+            border-collapse: collapse; /* Une los bordes de las celdas para que no se vean bordes dobles */
+            margin-top: 15px;
+        }
+
+        th, td {
+            border: 1px solid #cbd5e1; /* Borde para cada celda */
+            padding: 12px; /* Relleno interno en cada celda */
+            text-align: left; /* Alineación del texto a la izquierda */
+        }
+
+        th {
+            background-color: #1e293b; /* Fondo oscuro para los encabezados de tabla */
+            color: white;
+        }
+
+        /* Pseudo-clase :nth-child(even) -> Selecciona las filas pares para hacer efecto cebra */
+        tr:nth-child(even) {
+            background-color: #f1f5f9;
+        }
+
+        /* ==========================================
+           7. ESTILOS DE FORMULARIO E ID (#id)
+           ========================================== */
+        /* Se usa numeral (#) para seleccionar un ID único (id="formulario-contacto") */
+        #formulario-contacto {
+            display: flex;
+            flex-direction: column; /* Apila los elementos del formulario verticalmente (en columna) */
+            gap: 15px; /* Espacio entre cada campo del formulario */
+        }
+
+        label {
+            font-weight: bold; /* Etiquetas de texto en negrita */
+            margin-bottom: 5px;
+            display: block; /* Fuerza a que la etiqueta ocupe toda su propia línea */
+        }
+
+        input, select, textarea {
+            width: 100%; /* Ocupan todo el ancho */
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 5px;
+            font-size: 16px; /* Tamaño de letra legible */
+        }
+
+        /* Pseudo-clase :focus -> Se activa cuando el usuario hace clic dentro de un campo para escribir */
+        input:focus, select:focus, textarea:focus {
+            outline: none; /* Quita el borde por defecto del navegador */
+            border-color: #38bdf8; /* Cambia el color del borde a azul claro */
+            box-shadow: 0 0 5px rgba(56, 189, 248, 0.4);
+        }
+
+        .btn-enviar {
+            background-color: #0284c7;
+            color: white;
+            border: none; /* Sin borde */
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer; /* Cambia la flecha del ratón por una mano al pasar por encima */
+            align-self: flex-start; /* Evita que el botón se estire al 100%, ajustándose a su texto */
+        }
+
+        .btn-enviar:hover {
+            background-color: #0369a1; /* Oscurece el botón al pasar el cursor */
+        }
+
+        /* ==========================================
+           8. PIE DE PÁGINA
+           ========================================== */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #0f172a;
+            color: #94a3b8;
+            font-size: 14px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body> <!-- Contiene todo el contenido visible para el usuario -->
+
+    <!-- <header>: Encabezado principal de la página -->
+    <header>
+        <h1>Guía Práctica de HTML5 y CSS3</h1> <!-- <h1> es el título más importante (solo debe haber uno por página) -->
+        <p>Estructura semántica, estilos y diseño de cajas</p>
+
+        <!-- <nav>: Define un bloque de enlaces de navegación -->
+        <nav>
+            <ul> <!-- <ul>: Lista desordenada (con viñetas) -->
+                <li><a href="#seccion-texto">Textos y Listas</a></li> <!-- <li>: Elemento de lista | <a>: Enlace (href="#id" salta a esa sección) -->
+                <li><a href="#seccion-tabla">Tablas</a></li>
+                <li><a href="#seccion-formulario">Formulario</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- <main>: Envuelve el contenido principal y único de esta página -->
+    <main class="contenedor">
+
+        <!-- <section>: Agrupa contenido temático relacionado. Usa 'id' para navegación y 'class' para estilos -->
+        <section id="seccion-texto" class="tarjeta">
+            <h2>1. Textos, Enlaces y Cajas Flexibles</h2> <!-- <h2>: Subtítulo de segundo nivel (va de h1 a h6) -->
+            
+            <!-- <p>: Párrafo de texto. Dentro usamos etiquetas en línea (inline) -->
+            <p>
+                En HTML podemos dar formato semántico al texto usando <strong>negritas de importancia (strong)</strong>, 
+                <em>texto enfatizado en cursiva (em)</em>, o aplicar estilos específicos con CSS usando un 
+                <span class="destacado">elemento span con clase</span> sin romper la línea del párrafo.
+            </p>
+
+            <!-- <div>: Contenedor genérico en bloque usado para agrupar elementos y aplicarles diseño (Flexbox) -->
+            <div class="fila-flex">
+                <div class="columna">
+                    <h3>Lista Ordenada (ol)</h3>
+                    <ol> <!-- <ol>: Lista numerada automáticamente -->
+                        <li>Analizar el problema</li>
+                        <li>Maquetar en HTML</li>
+                        <li>Diseñar en CSS</li>
+                    </ol>
+                </div>
+
+                <div class="columna">
+                    <h3>Multimedia e Imágenes</h3>
+                    <!-- <img>: Etiqueta autocerrada para imágenes. 
+                         'src' es la ruta o URL; 'alt' es el texto alternativo si la imagen no carga -->
+                    <img src="https://via.placeholder.com/300x80/1e293b/38bdf8?text=Ejemplo+de+Imagen" 
+                         alt="Banner de ejemplo" 
+                         style="max-width: 100%; border-radius: 4px; margin-top: 8px;">
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE TABLAS -->
+        <section id="seccion-tabla" class="tarjeta">
+            <h2>2. Estructura de una Tabla</h2>
+            <p>Las tablas se dividen semánticamente en cabecera (thead) y cuerpo (tbody).</p>
+
+            <table> <!-- Contenedor principal de la tabla -->
+                <thead> <!-- Agrupa las filas de encabezado -->
+                    <tr> <!-- <tr> (Table Row): Define una fila horizontal -->
+                        <th>Etiqueta / Propiedad</th> <!-- <th> (Table Header): Celda de título (en negrita y centrada por defecto) -->
+                        <th>Lenguaje</th>
+                        <th>Función Principal</th>
+                    </tr>
+                </thead>
+                <tbody> <!-- Agrupa las filas de datos de la tabla -->
+                    <tr>
+                        <td><code>display: flex;</code></td> <!-- <td> (Table Data): Celda de datos normal -->
+                        <td>CSS</td>
+                        <td>Organiza elementos en filas o columnas fácilmente.</td>
+                    </tr>
+                    <tr>
+                        <td><code>margin / padding</code></td>
+                        <td>CSS</td>
+                        <td>Controla el espacio exterior (margin) e interior (padding).</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;section&gt; / &lt;div&gt;</code></td>
+                        <td>HTML</td>
+                        <td>Contenedores de bloque para agrupar contenido.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECCIÓN DE FORMULARIOS -->
+        <section id="seccion-formulario" class="tarjeta">
+            <h2>3. Formulario Interactivo</h2>
+            
+            <!-- <form>: Envuelve los controles interactivos para enviar datos.
+                 'action' indica a qué servidor se envían, 'method' cómo se envían (GET o POST) -->
+            <form id="formulario-contacto" action="#" method="POST">
+                
+                <div>
+                    <!-- <label>: Etiqueta descriptiva. Su atributo 'for' debe coincidir con el 'id' del input para vincularlos -->
+                    <label for="nombre">Nombre completo:</label>
+                    <!-- <input type="text">: Campo de texto de una línea. 'required' impide enviar el formulario vacío -->
+                    <input type="text" id="nombre" name="nombre" placeholder="Ej. Juan Pérez" required>
+                </div>
+
+                <div>
+                    <label for="correo">Correo electrónico:</label>
+                    <!-- type="email" valida automáticamente que el texto tenga un formato de correo (@) -->
+                    <input type="email" id="correo" name="correo" placeholder="usuario@correo.com" required>
+                </div>
+
+                <div>
+                    <label for="lenguaje">Tema favorito de la materia:</label>
+                    <!-- <select>: Menú desplegable de opciones -->
+                    <select id="lenguaje" name="lenguaje">
+                        <option value="" disabled selected>-- Selecciona una opción --</option>
+                        <option value="html">Estructura con HTML5</option>
+                        <option value="css">Diseño con CSS3 y Flexbox</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="comentarios">Notas o comentarios:</label>
+                    <!-- <textarea>: Campo de texto amplio de múltiples líneas -->
+                    <textarea id="comentarios" name="comentarios" rows="3" placeholder="Escribe tus apuntes aquí..."></textarea>
+                </div>
+
+                <!-- <button type="submit">: Botón que procesa y envía los datos del formulario -->
+                <button type="submit" class="btn-enviar">Enviar Datos</button>
+            </form>
+        </section>
+
+    </main>
+
+    <!-- <footer>: Pie de página, usado para derechos de autor, enlaces secundarios o información de contacto -->
+    <footer>
+        <p>&copy; 2026 Material de Estudio Web. Creado para repaso de examen.</p> <!-- &copy; genera el símbolo © -->
+    </footer>
+
+</body>
+</html>

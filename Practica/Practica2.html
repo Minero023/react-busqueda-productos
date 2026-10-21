@@ -1,0 +1,270 @@
+<!DOCTYPE html> <!-- Estándar HTML5 -->
+<html lang="es"> <!-- Idioma del documento -->
+
+<head>
+    <meta charset="UTF-8"> <!-- Codificación para tildes y caracteres especiales -->
+    <!-- VITAL PARA EL EXAMEN: Sin esta etiqueta meta viewport, los @media queries NO funcionan en celulares -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repaso: CSS Grid y Media Queries</title>
+
+    <style>
+        /* ==========================================
+           1. VARIABLES CSS (:root) Y RESETEO GENERAL
+           ========================================== */
+        /* :root permite declarar variables globales que tú usaste con var(--nombre) */
+        :root {
+            --color-borde: rgba(255, 255, 255, 0.35); /* Variable para los bordes */
+            --sombra: 0 8px 20px rgba(0, 0, 0, 0.15); /* Variable para las sombras */
+        }
+
+        /* OJO: En tu apunte había un guion (-), pero el selector universal SIEMPRE es asterisco (*) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box; /* Incluye el padding y border dentro del tamaño total de la caja */
+        }
+
+        html {
+            scroll-behavior: smooth; /* Hace que al dar clic en un enlace interno (#id), la página baje suavemente */
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e2e8f0;
+            color: #0f172a;
+            line-height: 1.5;
+        }
+
+        /* ==========================================
+           2. SECCIÓN 1: CABECERA STICKY (Pegajosa)
+           ========================================== */
+        .Parte_superior {
+            position: sticky; /* Se comporta normal hasta hacer scroll, luego se queda "pegada" en la pantalla */
+            top: 0; /* Se pega en el borde superior (0px desde arriba) al bajar */
+            z-index: 1000; /* Asegura que esta barra quede POR ENCIMA de las demás cajas al hacer scroll */
+            text-align: center;
+            color: white;
+
+            /* clamp(mínimo, ideal, máximo): El padding lateral se adapta solo según el ancho de pantalla */
+            padding: 1rem clamp(1rem, 5vw, 5rem);
+
+            background-color: rgba(0, 76, 253, 0.8); /* Azul con 80% de opacidad (0.8) para dejar ver el fondo */
+            border-bottom: 1px solid var(--color-borde); /* Usa la variable creada en :root */
+            box-shadow: var(--sombra);
+
+            /* Efecto Glassmorphism (cristal esmerilado): desenfoca lo que pasa por detrás de la barra */
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px); /* Compatibilidad con navegadores Safari */
+        }
+
+        .Parte_superior nav {
+            margin-top: 8px;
+        }
+
+        .Parte_superior a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+            border-bottom: 2px solid transparent;
+        }
+
+        .Parte_superior a:hover {
+            border-bottom: 2px solid #ffffff;
+        }
+
+        /* ==========================================
+           3. SECCIONES CON CSS GRID (2, 3 y 4 Columnas)
+           ========================================== */
+        /* Parte_arribasegunda: 2 COLUMNAS IGUALES */
+        .Parte_arribasegunda {
+            text-align: center;
+            gap: 2rem; /* Espacio de separación (filas y columnas) entre las celdas del Grid */
+            padding: 2.5rem clamp(1rem, 5vw, 5rem);
+            background-color: rgba(23, 219, 111, 0.8); /* Verde */
+            border-bottom: 1px solid var(--color-borde);
+            box-shadow: var(--sombra);
+
+            display: grid; /* Activa el sistema de cuadrícula CSS Grid */
+            /* 1fr 1fr = Divide el espacio disponible en 2 fracciones exactamente iguales (50% y 50%) */
+            grid-template-columns: 1fr 1fr;
+        }
+
+        /* Parte_mediatercera: 3 COLUMNAS IGUALES */
+        .Parte_mediatercera {
+            text-align: center;
+            gap: 2rem;
+            padding: 2.5rem clamp(1rem, 5vw, 5rem);
+            background-color: rgba(180, 219, 39, 0.8); /* Amarillo verdoso */
+            border-bottom: 1px solid var(--color-borde);
+            box-shadow: var(--sombra);
+
+            display: grid;
+            /* 1fr 1fr 1fr = Crea 3 columnas del mismo ancho (33.3% cada una) */
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        /* Parte_abajocuarta: 4 COLUMNAS IGUALES */
+        .Parte_abajocuarta {
+            text-align: center;
+            gap: 2rem;
+            padding: 2.5rem clamp(1rem, 5vw, 5rem);
+            background-color: rgba(192, 79, 27, 0.8); /* Naranja / Terracota */
+            border-bottom: 1px solid var(--color-borde);
+            box-shadow: var(--sombra);
+
+            display: grid;
+            /* 1fr 1fr 1fr 1fr = Crea 4 columnas iguales (25% cada una). 
+               Nota: También se puede abreviar como repeat(4, 1fr) */
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+        }
+
+        /* Estilo para las tarjetas internas (hijos directos del Grid) para visualizar las celdas */
+        .caja-grid {
+            background-color: rgba(255, 255, 255, 0.92);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid #cbd5e1;
+        }
+
+        .caja-grid h3 {
+            margin-bottom: 8px;
+            color: #1e293b;
+        }
+
+        /* ==========================================
+           4. SECCIÓN FINAL STICKY INFERIOR (Pie de página)
+           ========================================== */
+        .Parte_finalquinta {
+            position: sticky;
+            bottom: 0; /* Se queda pegada en la parte INFERIOR de la ventana */
+            z-index: 900;
+            text-align: center;
+            color: #ffffff;
+            padding: 1rem clamp(1rem, 5vw, 5rem);
+            background-color: rgba(15, 23, 42, 0.85); /* Azul muy oscuro casi transparente */
+            border-top: 1px solid var(--color-borde);
+            box-shadow: var(--sombra);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+
+        /* ==========================================
+           5. MEDIA QUERIES (Diseño Responsivo / Adaptable)
+           ========================================== */
+        
+        /* PUNTO DE QUIEBRE 1 (Tablets): Se aplica SOLO cuando la pantalla mide 800px o MENOS */
+        @media (max-width: 800px) {
+            /* La sección de 3 columnas pasa a tener 1 sola columna vertical y 3 filas */
+            .Parte_mediatercera {
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr 1fr 1fr;
+            }
+
+            /* La sección de 4 columnas pasa a tener 2 columnas (2x2) para que no queden apretadas */
+            .Parte_abajocuarta {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto; /* Ajusta la altura de las filas automáticamente */
+            }
+        }
+
+        /* PUNTO DE QUIEBRE 2 (Celulares): Se aplica SOLO cuando la pantalla mide 600px o MENOS */
+        @media (max-width: 600px) {
+            /* En pantallas pequeñas, TODAS las secciones se apilan en 1 sola columna (1fr) */
+            .Parte_arribasegunda {
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr 1fr;
+            }
+
+            .Parte_mediatercera {
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr 1fr 1fr;
+            }
+
+            .Parte_abajocuarta {
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr 1fr 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 1. PARTE SUPERIOR (Barra fija superior con desenfoque) -->
+    <header class="Parte_superior">
+        <h1>Laboratorio de CSS Grid y @media</h1>
+        <p>Achica el ancho de tu navegador a menos de 800px y 600px para ver cómo cambian las columnas</p>
+        <nav>
+            <a href="#sec-2col">2 Columnas</a>
+            <a href="#sec-3col">3 Columnas</a>
+            <a href="#sec-4col">4 Columnas</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- 2. PARTE ARRIBA SEGUNDA (2 Columnas en PC -> 1 Columna en móvil <= 600px) -->
+        <section id="sec-2col" class="Parte_arribasegunda">
+            <article class="caja-grid">
+                <h3>Columna 1 (1fr)</h3>
+                <p>En escritorio y tablet ocupo la mitad izquierda (50%). En celulares (menos de 600px) ocupo el 100% del ancho.</p>
+            </article>
+            <article class="caja-grid">
+                <h3>Columna 2 (1fr)</h3>
+                <p>En escritorio y tablet ocupo la mitad derecha (50%). El espacio entre nosotras lo define <code>gap: 2rem</code>.</p>
+            </article>
+        </section>
+
+        <!-- 3. PARTE MEDIA TERCERA (3 Columnas en PC -> 1 Columna en <= 800px) -->
+        <section id="sec-3col" class="Parte_mediatercera">
+            <article class="caja-grid">
+                <h3>Tarjeta 1 (1fr)</h3>
+                <p>En pantallas grandes somos <strong>3 columnas iguales</strong> gracias a <code>grid-template-columns: 1fr 1fr 1fr;</code>.</p>
+            </article>
+            <article class="caja-grid">
+                <h3>Tarjeta 2 (1fr)</h3>
+                <p>Al bajar de <strong>800px</strong>, el primer <code>@media</code> nos convierte directamente en 1 sola columna vertical.</p>
+            </article>
+            <article class="caja-grid">
+                <h3>Tarjeta 3 (1fr)</h3>
+                <p>Además, se activa <code>grid-template-rows: 1fr 1fr 1fr;</code> para repartir las 3 filas iguales.</p>
+            </article>
+        </section>
+
+        <!-- 4. PARTE ABAJO CUARTA (4 Cols en PC -> 2 Cols en <= 800px -> 1 Col en <= 600px) -->
+        <section id="sec-4col" class="Parte_abajocuarta">
+            <div class="caja-grid">
+                <h3>Item 1</h3>
+                <p>PC: 4 por fila</p>
+                <p>Tablet (800px): 2 por fila</p>
+                <p>Móvil (600px): 1 por fila</p>
+            </div>
+            <div class="caja-grid">
+                <h3>Item 2</h3>
+                <p>PC: 4 por fila</p>
+                <p>Tablet (800px): 2 por fila</p>
+                <p>Móvil (600px): 1 por fila</p>
+            </div>
+            <div class="caja-grid">
+                <h3>Item 3</h3>
+                <p>PC: 4 por fila</p>
+                <p>Tablet (800px): 2 por fila</p>
+                <p>Móvil (600px): 1 por fila</p>
+            </div>
+            <div class="caja-grid">
+                <h3>Item 4</h3>
+                <p>PC: 4 por fila</p>
+                <p>Tablet (800px): 2 por fila</p>
+                <p>Móvil (600px): 1 por fila</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- 5. PARTE FINAL QUINTA (Barra inferior con efecto cristal) -->
+    <footer class="Parte_finalquinta">
+        <p><strong>Barra Inferior Sticky (bottom: 0)</strong> — Desliza hacia arriba y abajo para ver el desenfoque <code>backdrop-filter: blur(18px)</code></p>
+    </footer>
+
+</body>
+</html>

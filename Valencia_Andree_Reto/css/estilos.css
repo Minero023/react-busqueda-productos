@@ -1,0 +1,11 @@
+* {
+    box-sizing: border-box;
+}
+:root{
+    color: aquamarine;
+    background-color: aqua;
+}
+body{
+    list-style-type: height 1.5;
+    background-color: antiquewhite;
+}

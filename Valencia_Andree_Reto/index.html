@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/estilos.css">
+    </head>
+
+    <body>
+
+        <header>
+            <h1>Hackathon Estudiantil 2026</h1>
+            <p>En los dias mas oscuros estos jovenes iluminaran el futuro</p>
+            <nav>
+                <ul>
+                    <li><a href="#agenda">Agenda</a></li>
+                    <li><a href="#inscripcion">Inscripcion</a></li>
+                    <li><a href="#premios">Premios</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+
+            <section id="agenda">
+                <h2>Agenda</h2>
+                <table>
+                    <thead >
+                        <tr>
+                            <th>Agenda</th>
+                            <th>Inscripcion</th>
+                            <th>Premios</th>
+                        </tr>
+                    </thead>
+                    <thbody>
+                        <tr>
+                            <td><code>1</code></td>
+                            <td>2</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td><code>1</code></td>
+                            <td>2</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td><code>1</code></td>
+                            <td>2</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td><code>1</code></td>
+                            <td>2</td>
+                            <td>3</td>
+                        </tr> 
+                </table>
+            </section>
+
+            <section id="inscripcion">
+                <h2>Inscripción</h2>
+                <form action="#" method="post">
+                    <fieldset>
+                        <legend>
+                            <div class="mb-3">
+                            <label for="Nombre completo">Nombre completo:</label>
+                            <input type="text" id="Nombre completo" name="Nombre completo" required minlength="3" maxlength="6660" placeholder="Nombre completo">
+                            </div>
+                            <br>
+                            <div class="mb-3">
+                            <label for="Correo institucional">Correo institucional:</label>
+                            <input type="email" id="Correo institucional" name="Correo institucional" required placeholder="example@university.edu">
+                            </div>
+                            <div class="mb-3">
+                                <br>
+                            <label for="Telefono">Telefono:</label>
+                            <input type="tel" id="Telefono" name="Telefono" required pattern="[0-9]{10}" title="Ingrese un número de teléfono válido de 10 dígitos" placeholder="1234567890">
+                            </div>
+                            <div class="mb-3">
+                                <br>
+                            <label for="Fecha de nacimiento">Fecha de nacimiento:</label>
+                            <input type="date" id="Fecha de nacimiento" name="Fecha de nacimiento" required max="2010-12-31">
+                            </div>
+                        </legend>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>
+                            <div class="mb-3">
+                                <br>
+                            <label for="Nombre del equipo">Nombre del equipo:</label>
+                            <input type="text" id="Nombre del equipo" name="Nombre del equipo" required>
+                            </div>
+                            <div class="mb-3">
+                                <br>
+                            <label for="Numero de integrantes">Número de integrantes:</label>
+                            <input type="number" id="Numero de integrantes" name="Numero de integrantes" required min="2" max="4" value="2">
+                            </div>
+                            <div class="mb-3">
+                                <br>
+                            <label for="Categoria">Categoría:</label>
+                            <select id="Categoria" name="Categoria" required>
+                                <option value=""></option>
+                                <option value="Web">Web</option>
+                                <option value="Movil">Movil</option>
+                                <option value="Inteligencia Artificial">Inteligencia Artificial</option>
+                            </select>
+                            </div>
+                            <div class="mb-3">
+                                <br>
+                <label class="form-label fw-semibold d-block">Nivel de experiencia:</label>
+                <br>
+                <br>
+                <div class="d-flex gap-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="Nivel de experiencia" id="nivelPrincipiante" value="principiante" required>
+                    <label class="form-check-label" for="nivelPrincipiante">Principiante</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="Nivel de experiencia" id="nivelIntermedio" value="intermedio">
+                    <label class="form-check-label" for="nivelIntermedio">Intermedio</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="Nivel de experiencia" id="nivelAvanzado" value="avanzado">
+                    <label class="form-check-label" for="nivelAvanzado">Avanzado</label>
+                  </div>
+                </div>
+              </div>
+              <br>
+                            <div class="mb-3">
+                <label class="form-label fw-semibold d-block">Tecnologías que dominan:</label>
+                <br>
+                <br>
+                <div class="d-flex gap-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="tecnologias" id="tecnologiaHTML" value="HTML" required>
+                    <label class="form-check-label" for="tecnologiaHTML">HTML</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="tecnologias" id="tecnologiaCSS" value="CSS" required>
+                    <label class="form-check-label" for="tecnologiaCSS">CSS</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="tecnologias" id="tecnologiaJavaScript" value="JavaScript" required>
+                    <label class="form-check-label" for="tecnologiaJavaScript">JavaScript</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="tecnologias" id="tecnologiaPython" value="Python" required>
+                    <label class="form-check-label" for="tecnologiaPython">Python</label>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <div class="mb-3">
+                <label class="textarea-label fw-semibold d-block" for="Idea del proyecto">Idea del proyecto</label><br>
+                <textarea class="form-control" id="Idea del proyecto" rows="4" maxlength="300"></textarea>
+              </div>
+              <br>
+              <div class="mb-3">
+                <label class="form-label fw-semibold d-block">Reglamento:</label>
+                <div class="d-flex gap-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="reglas" id="regla1" value="Regla 1" required>
+                    <label class="form-check-label" for="regla1">Acepto el reglamento de hackathon</label>
+                  </div>
+              </div>
+              <br>
+              <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Inscribir equipo</button>
+                <button type="reset" class="btn btn-secondary">Limpiar</button>
+                </div>
+                        </legend>
+                    </fieldset>
+                </form>
+            </section>
+
+            <section id="premios">
+                <h2>Premios</h2>
+            </section>
+        </main>
+        <footer>
+            <small>© 2026 Hackathon Estudiantil. Todos los derechos reservados.</small>
+            <time datetime="2026-11-20">20 de noviembre de 2026</time>
+        </footer>
+    
+    </body>
+</html>
