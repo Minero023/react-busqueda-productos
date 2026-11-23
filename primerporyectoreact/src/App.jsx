@@ -12,6 +12,7 @@ import Catalogo from './Pages/Catalogoweb.jsx';
 import Ofertas from './Pages/Ofertas.jsx';
 import Buscar from './Pages/Buscar.jsx';
 import DetalleProducto from './Pages/DetalleProducto.jsx';
+
 function App() {
   const [lista, setLista] = useState([]);
 
@@ -41,7 +42,7 @@ function App() {
               <Route path="/catalogo" element={<Catalogo agregarAlCarrito={agregarProducto} />} />
               <Route path="/ofertas" element={<Ofertas agregarAlCarrito={agregarProducto} />} />
               <Route path="/buscar" element={<Buscar agregar={agregarProducto} />} />
-              <Route path="/producto/:codigo " element={<DetalleProducto agregar={agregarProducto} />} />
+              <Route path="/producto/:id" element={<DetalleProducto agregar={agregarProducto} />} />
             </Routes>
           </div>
         </section>
