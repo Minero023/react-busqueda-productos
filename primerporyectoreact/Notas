@@ -1,0 +1,131 @@
+/*
+=============================================================================
+GUÍA RÁPIDA: CÓMO RENOMBRAR UNA PÁGINA (Ejemplo: De PruebaA a Examen)
+=============================================================================
+PASO 1: Archivo físico
+  - En la carpeta src/Pages, clic derecho a "PruebaA.jsx" -> Rename -> "Examen.jsx"
+
+PASO 2: Dentro del archivo Examen.jsx
+  - Cambia el nombre de la función: function Examen() { ... }
+  - Cambia la exportación al final: export default Examen;
+
+PASO 3: En src/App.jsx
+  - Modifica la importación arriba: import Examen from './Pages/Examen.jsx'
+  - Modifica la ruta abajo: <Route path="/examen" element={<Examen />} />
+
+PASO 4: En src/components/Encabezado.jsx
+  - Actualiza el Link: <Link to="/examen" className="...">Examen Práctico</Link>
+
+TIP SALVA-VIDAS: Haz esto con el servidor apagado (Ctrl + C). Guarda todos 
+los archivos (Ctrl + S) y vuelve a prenderlo (npm run dev) para evitar errores.
+=============================================================================
+*/
+
+/*
+===================================================================================================
+
+1. ENRUTAMIENTO (Navegación sin recargar la página)
+---------------------------------------------------------------------------------------------------
+¿Qué usamos? react-router-dom (BrowserRouter, Routes, Route, Link).
+¿Cómo funciona? 
+En lugar de tener varias páginas HTML separadas, React tiene una sola y cambia el "componente" 
+(la vista) según la URL.
+- <BrowserRouter>: Envuelve toda la app para habilitar la navegación.
+- <Routes>: Es el contenedor donde definimos todas las rutas posibles.
+- <Route path="/ruta" element={<Componente />}>: Define qué componente mostrar según la URL.
+- <Link to="/ruta">: Sustituye a la etiqueta <a> para viajar sin que la página parpadee o recargue.
+
+2. ESTADOS (La "Memoria" de React)
+---------------------------------------------------------------------------------------------------
+¿Qué usamos? useState.
+¿Cómo funciona?
+Sirve para guardar datos que van a cambiar y que, al cambiar, deben actualizar la pantalla.
+Sintaxis: const [variable, setVariable] = useState(valorInicial);
+Ejemplos que hicimos:
+- const [nombres, setNombres] = useState(""); -> Texto (Formularios).
+- const [edad, setEdad] = useState(0); -> Números (Cálculos).
+- const [lista, setLista] = useState([]); -> Arreglos (El carrito de compras).
+- const [cargando, setCargando] = useState(true); -> Booleanos (Para mostrar "Cargando...").
+
+3. PROPS (Comunicación entre Padre e Hijo)
+---------------------------------------------------------------------------------------------------
+¿Cómo funciona?
+Son los "parámetros" que un componente Padre (ej. App.jsx) le pasa a un Hijo (ej. Productos.jsx).
+- El padre lo envía así: <Productos agregarProducto={agregarProducto} />
+- El hijo lo recibe así: function Productos({ agregarProducto }) { ... }
+¡Gracias a esto el Catálogo y los Productos pueden enviar datos al carrito que vive en App.jsx!
+
+4. EFECTOS Y APIs (Conectarse al mundo exterior)
+---------------------------------------------------------------------------------------------------
+¿Qué usamos? useEffect y fetch.
+¿Cómo funciona?
+useEffect sirve para ejecutar código en momentos específicos. Si le pasamos un arreglo vacío [] 
+al final, se ejecuta UNA SOLA VEZ cuando la página se abre (ideal para cargar datos).
+Adentro usamos 'fetch' para ir a internet, traer un JSON, convertirlo y guardarlo en un Estado.
+
+5. RENDERIZADO DE LISTAS (El poder de .map)
+---------------------------------------------------------------------------------------------------
+¿Cómo funciona?
+En lugar de escribir 30 tarjetas HTML a mano, tomamos un arreglo (el de la API o el del carrito), 
+le aplicamos .map(), y por cada elemento retornamos un pedazo de HTML (como un <li> o un <div>). 
+SIEMPRE requiere la propiedad "key" para que React no se confunda al actualizar la lista.
+
+
+===================================================================================================
+COMBINACIONES CLAVE (RECETARIOS DE CÓDIGO)
+===================================================================================================
+
+▶ RECETA 1: Input de texto vinculado a un Estado (Para formularios)
+-----------------------------------------------------------------
+const [ciudad, setCiudad] = useState("");
+<input 
+    type="text" 
+    value={ciudad} 
+    onChange={(e) => setCiudad(e.target.value)} 
+/>
+
+▶ RECETA 2: Mapear un arreglo para crear tarjetas o listas (Catálogo / Carrito)
+-----------------------------------------------------------------
+{productos.map((producto) => (
+    <div key={producto.id}>
+        <h4>{producto.nombre}</h4>
+        <p>${producto.precio}</p>
+    </div>
+))}
+
+▶ RECETA 3: Consumir una API externa de forma sencilla al cargar la página
+-----------------------------------------------------------------
+const [datos, setDatos] = useState([]);
+
+useEffect(() => {
+    fetch("https://url-de-la-api.com/datos")
+        .then(respuesta => respuesta.json())
+        .then(data => {
+            setDatos(data); // Guardamos en el estado lo que llegó
+        });
+}, []); // <-- El array vacío indica: "Hazlo solo 1 vez al cargar"
+
+▶ RECETA 4: Agregar un objeto a un arreglo (Lógica de Carrito de Compras)
+-----------------------------------------------------------------
+function agregarAlCarrito(nombre, precio) {
+    const nuevo = { nombre: nombre, precio: precio };
+    // Usamos el "spread operator" (...) para copiar lo que ya había y sumar el nuevo
+    setLista([...lista, nuevo]);
+}
+
+▶ RECETA 5: Renderizado Condicional (Los famosos 'if' dentro de React)
+-----------------------------------------------------------------
+// Si es true muestra algo, sino otra cosa (Operador Ternario)
+{ cargando ? <h1>Cargando...</h1> : <h1>Datos listos!</h1> }
+
+// O si solo quieres mostrar algo si es true (Operador Lógico &&)
+{ errorLicores && <div>No puedes vender licor a menores</div> }
+
+===================================================================================================
+CONSEJOS PARA LA PRUEBA DE HOY:
+1. Si algo no se actualiza en pantalla, probablemente olvidaste usar el "setVariable".
+2. Si te da error de sintaxis en el HTML, revisa que todas las etiquetas se cierren (incluso <br/> o <img/>).
+3. Todo el JavaScript dentro del HTML debe ir entre llaves { }.
+4. Respira. ¡Ya hiciste desde un simulador bancario hasta un e-commerce completo con APIs e Impuestos!
+===================================================================================================
+*/
