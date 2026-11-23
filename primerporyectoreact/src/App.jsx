@@ -31,7 +31,7 @@ function App() {
     <BrowserRouter>
       <main className="container bg-primary text-white min-vh-100 pb-4">
         <section>
-          <Encabezado titulo="Puce-Ibarra" />
+          <Encabezado titulo="Puce-Ibarra AndreeValencia-Fausto-Liquinchana " />
           <div className="p-3">
             <Routes>
               <Route path="/" element={<Inicio />} />
